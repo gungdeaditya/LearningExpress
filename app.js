@@ -5,6 +5,7 @@ var logger = require('morgan')
 var cookieParser = require('cookie-parser')
 var bodyParser = require('body-parser')
 
+var rootURL = require('./root-url')
 var index = require('./api')
 var users = require('./api/users')
 var books = require('./api/books')
@@ -20,6 +21,7 @@ app.use(cookieParser())
 app.use(express.static(path.join(__dirname, 'public')))
 
 // routes
+app.use('/', rootURL)
 app.use('/api', index)
 app.use('/api/users', users)
 app.use('/api/books', books)
