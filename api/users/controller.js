@@ -1,3 +1,5 @@
+const User = require('../../models').User
+
 module.exports = {
   getAll: (req, res, next) => {
     res.status(200).send({
@@ -19,11 +21,17 @@ module.exports = {
   },
 
   create: (req, res, next) => {
-    res.status(201).send({
-      body: req.body,
-      params: req.params,
-      query: req.query
+    User.create({name:req.body.name, email:req.body.email}).then(user => {
+      res.status(201).send({
+        result: user,
+        message:true
+      })
     })
+    // res.status(201).send({
+    //   body: req.body,
+    //   params: req.params,
+    //   query: req.query
+    // })
   },
 
   update: (req, res, next) => {
